@@ -74,6 +74,7 @@ function Example3() {
 }
 
 // Renderizando listas de dados:
+
 const HierarquiaFlamengo = [
     {nome: "Zico", id: 1 },
     {nome: "Bebeto", id:2},
@@ -117,7 +118,7 @@ function Example5() {
     )
 }
 
-//  Componentes com "manipuladores de eventos":
+// //  Componentes com "manipuladores de eventos":
 function Example6() {
     function HandleClick(){
         alert("You clicked in the button!")
@@ -133,15 +134,15 @@ function Example6() {
 // Componentes com "estado":
 import { useState } from "react"; // importação necessária;
 // Criando componente:
-function Example7 () {
+function Example7() {
     const [Count, setCount] = useState(0);
 
-    function Handlers() {
-        setCount( Count + 1)
+    function HandleClick() {
+        setCount(Count + 1);
     }
     return (
-        <button onClick= {Handlers}>
-            Clicked {Count} times
+        <button onClick={HandleClick}>
+            You clicked {Count} times!
         </button>
     )
 }
@@ -156,15 +157,26 @@ function Example8() {
     )
 }
 // criando componente que dará interação ao botões:
-function MyButton() {
-    const [Count, setCount] = useState(0)
-
-    function HandleClick() {
-        setCount(count + 1)
-    }
+function MyButton([ count, onClick]) {
     return (
-        <button onClick={HandleClick}> 
-            Cliked {Count} times in the button 
+        <button onClick={onClick}>
+            You clicked {count} times!
         </button>
     )
+}
+
+// Fazendo com que todos os "MyButton"´s alterem simultâneamente com um único clique:
+function Example9() {
+    const [Count, setCount] = useState(0);
+    
+    function HandleClick() {
+        setCount(Count + 1);
+    }
+    return (
+        <div>
+            <h1>Counters that update separately</h1>
+            <MyButton count = {Count} onClick = {HandleClick} />
+            <MyButton count = {Count} onClick = {HandleClick} />
+        </div>
+    );
 }
